@@ -28,7 +28,7 @@ class Application
       */
       public function run()
       {
-          
+          $this->session->start();
       }
      /**
       * Register classes in spl auto load register
