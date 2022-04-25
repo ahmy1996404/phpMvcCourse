@@ -19,9 +19,17 @@ class Application
          $this->share('file',$file);
          $this->registerClasses();
          $this->loadHelpers();
-        pre($this->file);
 
      }
+     /**
+      * Run the Application
+      *
+      * @return void
+      */
+      public function run()
+      {
+          
+      }
      /**
       * Register classes in spl auto load register
       *
@@ -60,6 +68,7 @@ class Application
       {
           $this->file->require($this->file->toVendor('helpers.php'));
       }
+
       /**
        * Get Shared Value 
        * 
@@ -68,7 +77,46 @@ class Application
        */
       public function get($key)
       {
-          return isset($this->container[$key])? $this->container[$key] : null;
+          if(! $this->isSharing($key)){
+              if ($this->isCoreAlias($key)){
+                  $this->share($key , $this->createNewCoreObject($key));
+              }else{
+                die('<b>'.$key . '</b> not found in application container');
+              }
+          }
+          return $this->container[$key];
+      }
+      /** 
+       * Determine if the given key is shared through Application
+       * 
+       * @param string $key
+       * @return bool
+       */
+      public function isSharing($key)
+      {
+          return isset($this->container[$key]);
+      }
+      /**
+       * Determine if the given key is an alias to core class
+       * 
+       * @param string $alias
+       * @return bool
+       */
+      public function isCoreAlias($alias)
+      {
+          $coreClasses = $this->coreClasses();
+          return isset($coreClasses[$alias]);
+      }
+      /**
+      * create new object for the core class based on the given alias
+      * @param string $alias
+      * @return object
+      */
+      public function createNewCoreObject($alias)
+      {
+          $coreClasses = $this->coreClasses();
+          $object = $coreClasses[$alias];
+          return new $object($this);
       }
      /**
       * Share the given key|value Through Application
@@ -79,6 +127,23 @@ class Application
       public function share($key , $value)
       {
           $this->container[$key] = $value;
+      }
+      /**
+       * Get All Core Classes with its alaises
+       * @return array
+       */
+      public function coreClasses()
+      {
+           return[
+               'request'    => 'System\\Http\\Request',
+               'response'    => 'System\\Http\\Response',
+               'session'    => 'System\\Session',
+               'cookie'    => 'System\\Cookie',
+               'load'    => 'System\\Loader',
+               'html'    => 'System\\Html',
+               'db'    => 'System\\Database',
+               'view'    => 'System\\View\\ViewFactory',
+           ];
       }
       /**
        * Get shared value dynimically
