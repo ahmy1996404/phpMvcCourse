@@ -17,9 +17,10 @@ class Application
      public function __construct(File $file)
      {
          $this->share('file',$file);
-         $this->registerClasses();
-         $this->loadHelpers();
 
+         $this->registerClasses();
+
+         $this->loadHelpers();
      }
      /**
       * Run the Application
@@ -29,6 +30,7 @@ class Application
       public function run()
       {
           $this->session->start();
+          $this->request->prepareUrl();
       }
      /**
       * Register classes in spl auto load register
@@ -47,6 +49,7 @@ class Application
        */
       public function load($class)
       { 
+          
           if (strpos($class , 'App')===0){
             $file = $this->file->to($class . '.php');
           }else{
