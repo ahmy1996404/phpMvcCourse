@@ -7,6 +7,8 @@ use System\Application;
 
 $file = new File(__DIR__);
 
-$app = new Application($file);
+// $app = new Application($file);
+$app =  Application::getInstance($file);
+
 $app->run();
 

@@ -86,7 +86,7 @@ class Request
      */
     public function url()
     {
-        return $this->url();
+        return $this->url;
     }
 
 }

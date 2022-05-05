@@ -30,7 +30,7 @@ class File
      * @return bool
      */
     public function exists($file){
-        return file_exists($file);
+        return file_exists($this->to($file));
     }
      /**
      * Require The fiven file
@@ -39,7 +39,7 @@ class File
      * @return void
      */
     public function require($file){
-        require $file;
+        require $this->to($file);
     }
     /**
      * Generate full path to the given path in vendor folder
