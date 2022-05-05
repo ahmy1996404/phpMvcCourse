@@ -38,7 +38,7 @@ class File
      * @param string $file 
      * @return void
      */
-    public function require($file){
+    public function call($file){
         require $this->to($file);
     }
     /**

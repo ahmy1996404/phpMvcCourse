@@ -51,7 +51,7 @@ class Application
       {
           $this->session->start();
           $this->request->prepareUrl();
-          $this->file->require('App/index.php');
+          $this->file->call('App/index.php');
           list($controller , $method , $arguments) = $this->route->getProperRoute();
       }
      /**
@@ -80,7 +80,7 @@ class Application
               
           }
            if ($this->file->exists($file)){
-                $this->file->require($file);
+                $this->file->call($file);
             }
       }
       /**
@@ -91,7 +91,7 @@ class Application
        */
       private function loadHelpers()
       {
-          $this->file->require('vendor/helpers.php');
+          $this->file->call('vendor/helpers.php');
       }
 
       /**
