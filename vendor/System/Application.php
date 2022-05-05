@@ -49,11 +49,12 @@ class Application
       */
       public function run()
       {
-          $this->session->start();
-          $this->request->prepareUrl();
-          $this->file->call('App/index.php');
-          list($controller , $method , $arguments) = $this->route->getProperRoute();
-      }
+        $this->session->start();
+        $this->request->prepareUrl();
+        $this->file->call('App/index.php');
+        list($controller , $method , $arguments) = $this->route->getProperRoute();
+        $this->load->action($controller , $method , $arguments);
+    }
      /**
       * Register classes in spl auto load register
       *

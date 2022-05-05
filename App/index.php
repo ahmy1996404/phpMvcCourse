@@ -4,7 +4,7 @@ use System\Application;
 
 $app = Application::getInstance();
 
-$app->route->add('/', 'Main/Home@index', 'GET');
+$app->route->add('/', 'Home', 'GET');
 
 // /post/my-title-post/42424224
 $app->route->add('/posts/:text/:id', 'Post/Post');
