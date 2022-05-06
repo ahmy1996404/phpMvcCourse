@@ -8,6 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo $this->load->controller('header')->index();
+        $data['my_name'] = 'Ahmed Hamouda';
+       return $this->view->render('home' , $data);
     }
 }

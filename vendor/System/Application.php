@@ -53,7 +53,9 @@ class Application
         $this->request->prepareUrl();
         $this->file->call('App/index.php');
         list($controller , $method , $arguments) = $this->route->getProperRoute();
-        $this->load->action($controller , $method , $arguments);
+        $output = (string) $this->load->action($controller , $method , $arguments);
+        $this->response->setOutput($output);
+        $this->response->send();
     }
      /**
       * Register classes in spl auto load register
