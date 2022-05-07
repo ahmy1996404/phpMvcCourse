@@ -8,7 +8,7 @@ abstract class Controller
      * 
      * @var \System\Application
      */
-    private $app;
+    protected $app;
     /**
      * Constructor
      * @param \System\Application $app
