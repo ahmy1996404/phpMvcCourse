@@ -28,3 +28,16 @@ if (!function_exists('array_get')){
         return isset($array[$key]) ? $array[$key] : $default ;
     }
 }
+if (!function_exists('_e')){
+/**
+ * Escape the given value
+ * 
+ * @param string $value
+ * @return string
+ */
+function _e($value)
+{
+    return htmlspecialchars($value);
+}
+
+}
